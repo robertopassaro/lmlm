@@ -2,76 +2,447 @@
    LMLM — main stylesheet
    ALL colors live in :root below. Change a value here and it
    updates everywhere it's used (via var(--name)).
-   Values are TEMPORARY placeholders — set properly in the styling step.
    ============================================================== */
 
 :root {
   /* --- Colors --- */
-  --color-bg: #000000;            /* page background (near-black) */
-  --color-surface: #000000;       /* slightly lifted background for cards */
-  --color-text: #ffffff;          /* main body text (off-white) */
-  --color-text-muted: #888888;    /* secondary text: authors, dates, captions */
-  --color-accent: #006b4d;        /* green: links, section markers — use sparingly */
-  --color-accent-hover: #006b4d;  /* accent on hover/focus */
-  --color-border: #333333;        /* dividers, card outlines */
+  /* Near-black with a faint green tint, so the green accent feels native
+     rather than pasted on. Pure #000 makes white text "vibrate" and looks harsh. */
+  --color-bg: #0b1411;            /* page background (near-black, green-tinted) */
+  --color-surface: #111c18;       /* slightly lifted background for cards */
+  --color-text: #e6ece9;          /* main body text (off-white, 15.6:1 on bg) */
+  --color-text-muted: #95a59e;    /* secondary text: authors, dates, captions (7.3:1) */
+  /* #006B4D itself is only 2.9:1 on near-black — too dark for readable text.
+     So text-level accents use a brighter green from the same family (6.2:1),
+     and the original #006B4D is kept for purely decorative marks. */
+  --color-accent: #1fa878;        /* green: links, section markers — use sparingly */
+  --color-accent-hover: #5cc9a0;  /* lighter on hover/focus (brightens on dark bg) */
+  --color-accent-deep: #006b4d;   /* brand green: decorative lines/underlines only, never text */
+  --color-border: #1e2d28;        /* dividers, card outlines — subtle, green-leaning */
 
-  /* --- Typography (placeholders) --- */
-  --font-heading: sans-serif;
-  --font-body: sans-serif;
+  /* --- Typography --- */
+  /* System font stacks: each device uses its own well-made built-in font
+     (San Francisco on Mac/iOS, Segoe UI on Windows, Roboto on Android).
+     No download, no third-party request, instant rendering. */
+  --font-heading: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                  "Helvetica Neue", Arial, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  /* Monospace for small labels (section numbers) — a quiet "research" note. */
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
-  /* --- Spacing & layout (placeholders) --- */
-  --space-section: 0;             /* vertical gap between sections */
-  --content-max-width: none;      /* max width of the text column */
-  --nav-height: 0;                /* used so anchor jumps don't hide headings under the sticky nav */
+  --line-height-body: 1.7;
+  --line-height-heading: 1.15;
+
+  /* --- Spacing & layout --- */
+  /* One small scale, each step roughly 1.5–2× the previous, so gaps feel related. */
+  --space-xs: 0.5rem;             /*  8px */
+  --space-sm: 1rem;               /* 16px */
+  --space-md: 1.5rem;             /* 24px */
+  --space-lg: 3rem;               /* 48px */
+  --space-xl: 5rem;               /* 80px */
+  --space-section: 7rem;          /* 112px: vertical gap between sections */
+  --space-gutter: 1.5rem;         /* side padding so content never touches the screen edge */
+
+  --content-max-width: 44rem;     /* ~70 characters per line: comfortable reading */
+  --layout-max-width: 64rem;      /* wider frame for nav + card grids */
+  --nav-height: 4rem;             /* used so anchor jumps don't hide headings under the sticky nav */
 }
 
 
 /* ==============================================================
    Global / base (html, body, links, headings, skip-link)
-   — smooth scrolling for anchor links will go here
    ============================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;         /* width includes padding — makes sizing predictable */
+}
+
+html {
+  scroll-behavior: smooth;
+  /* When jumping to #section, stop this far from the top so the
+     sticky nav doesn't sit on top of the heading. */
+  scroll-padding-top: calc(var(--nav-height) + var(--space-md));
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Respect users who turned off animations in their OS settings. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;           /* 17px: slightly larger than default for easy reading */
+  line-height: var(--line-height-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--font-heading);
+  line-height: var(--line-height-heading);
+  letter-spacing: -0.02em;        /* large text looks better slightly tightened */
+  font-weight: 500;
+}
+
+p {
+  margin: 0 0 var(--space-sm);
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration-line: underline;
+  text-decoration-color: var(--color-accent-deep);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+  text-decoration-color: currentColor;
+}
+
+/* Highlighted (selected) text uses the brand green. */
+::selection {
+  background-color: var(--color-accent-deep);
+  color: var(--color-text);
+}
+
+/* Visible keyboard focus ring (only shown for keyboard, not mouse clicks). */
+:focus-visible {
+  outline: 2px solid var(--color-accent-hover);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Skip link: off-screen until a keyboard user tabs to it. */
+.skip-link {
+  position: absolute;
+  top: var(--space-xs);
+  left: var(--space-xs);
+  z-index: 100;
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
 
 
 /* ==============================================================
    Navigation (sticky header)
    ============================================================== */
 
+.site-header {
+  position: sticky;               /* stays at the top while scrolling */
+  top: 0;
+  z-index: 50;
+  height: var(--nav-height);
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  max-width: var(--layout-max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-gutter);
+}
+
+.site-nav__brand {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.site-nav__brand:hover {
+  color: var(--color-accent-hover);
+}
+
+/* Small green square before the wordmark — a quiet logo stand-in. */
+.site-nav__brand::before {
+  content: "";
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.5em;
+  background-color: var(--color-accent);
+  vertical-align: 0.1em;
+}
+
+.site-nav__links {
+  display: flex;
+  gap: var(--space-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav__links a {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+.site-nav__links a:hover {
+  color: var(--color-accent-hover);
+}
+
 
 /* ==============================================================
    Shared section styles (.section)
    ============================================================== */
+
+/* Sections share one centered column. A thin rule separates them. */
+.hero,
+.section {
+  max-width: var(--layout-max-width);
+  margin: 0 auto;
+  padding-left: var(--space-gutter);
+  padding-right: var(--space-gutter);
+}
+
+main {
+  counter-reset: section;         /* numbers the h2s below: 01, 02, ... */
+}
+
+.section {
+  padding-top: var(--space-section);
+  padding-bottom: var(--space-section);
+  border-top: 1px solid var(--color-border);
+}
+
+/* Keep running text at a comfortable reading width inside the wider frame. */
+.section > p {
+  max-width: var(--content-max-width);
+}
+
+.section h2 {
+  margin-bottom: var(--space-lg);
+  font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem);
+  counter-increment: section;
+}
+
+/* Small green section number above each heading, followed by a short green rule
+   ("01 ——"). Generated by CSS, so it never needs editing in the HTML.
+   The rule is a background line positioned just after the two digits. */
+.section h2::before {
+  content: counter(section, decimal-leading-zero);
+  display: block;
+  margin-bottom: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--color-accent);
+  background-image: linear-gradient(var(--color-accent-deep), var(--color-accent-deep));
+  background-repeat: no-repeat;
+  background-size: 3rem 1px;
+  background-position: 2.75em center;
+}
+
+.section h3 {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-xs);
+}
 
 
 /* ==============================================================
    1. Hero (#hero)
    ============================================================== */
 
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Fills most of the first screen, minus the nav bar. */
+  min-height: calc(85vh - var(--nav-height));
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+}
+
+/* Short green bar above the title — the first thing the eye lands on. */
+.hero::before {
+  content: "";
+  display: block;
+  width: 3rem;
+  height: 3px;
+  margin-bottom: var(--space-md);
+  background-color: var(--color-accent);
+}
+
+.hero__title {
+  max-width: 18ch;                /* wraps the long title into a balanced block */
+  font-size: clamp(2.5rem, 1.6rem + 3.6vw, 4.5rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.hero__tagline {
+  max-width: var(--content-max-width);
+  margin-top: var(--space-md);
+  font-size: 1.25rem;
+  color: var(--color-text-muted);
+}
+
 
 /* ==============================================================
    2. Overview (#overview)
    ============================================================== */
+
+.section--overview > p {
+  font-size: 1.25rem;             /* lead paragraph: a touch larger */
+  line-height: 1.6;
+}
 
 
 /* ==============================================================
    3. About (#about) — problem + research pillars
    ============================================================== */
 
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.pillar {
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-accent-deep);   /* thin green rule, not a block */
+}
+
+.pillar p {
+  color: var(--color-text-muted);
+}
+
 
 /* ==============================================================
    4. Publications Archive (#publications) — .pub-card
    ============================================================== */
+
+.pub-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pub-card {
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pub-card:first-child {
+  border-top: 1px solid var(--color-border);
+}
+
+.pub-card__title {
+  max-width: var(--content-max-width);
+}
+
+.pub-card__authors,
+.pub-card__venue {
+  margin-bottom: var(--space-xs);
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+}
+
+.pub-card__links {
+  margin: 0;
+  font-size: 0.9375rem;
+}
 
 
 /* ==============================================================
    5. People (#people) — .person-card
    ============================================================== */
 
+.people-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: var(--space-lg) var(--space-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.person-card__photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;            /* square crop regardless of the source photo */
+  object-fit: cover;
+  margin-bottom: var(--space-sm);
+  background-color: var(--color-surface);
+  filter: grayscale(100%);        /* keeps a calm, uniform look across photos */
+}
+
+.person-card__name {
+  font-size: 1.0625rem;
+  margin-bottom: 0.25rem;
+}
+
+.person-card__role {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+}
+
 
 /* ==============================================================
    6. Funding & Partners (#funding) — .partner
    ============================================================== */
 
+.partner-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: var(--space-lg);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.partner {
+  padding: var(--space-md);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.partner img {
+  display: block;
+  max-height: 3rem;
+  width: auto;
+  margin-bottom: var(--space-sm);
+}
+
+.partner p {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
 
 /* ==============================================================
    Responsive adjustments (small screens)
+   — next step, pending review
    ============================================================== */
