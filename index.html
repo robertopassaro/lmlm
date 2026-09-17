@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- Makes the page scale correctly on phones instead of showing a zoomed-out desktop view. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LMLM — Linguistically Motivated Language Models</title>
+  <!-- TODO (content step): one-sentence description shown in search results / link previews. -->
+  <meta name="description" content="">
+  <!-- Relative path (no leading slash) so this works both when opened locally and on GitHub Pages. -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Accessibility: lets keyboard/screen-reader users jump past the nav. Will be visually hidden until focused (styling step). -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============================================================
+       NAVIGATION
+       Each href="#..." must match an id="..." on a section below.
+       ============================================================ -->
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Main">
+      <a class="site-nav__brand" href="#hero">LMLM</a>
+      <ul class="site-nav__links">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#people">People</a></li>
+        <li><a href="#funding">Funding</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================================================
+         1. HERO
+         ============================================================ -->
+    <section id="hero" class="hero">
+      <h1 class="hero__title">LMLM (Linguistically Motivated Language Models)</h1>
+      <!-- TODO (content step): one-line core mission statement, as a <p class="hero__tagline">. -->
+    </section>
+
+    <!-- ============================================================
+         2. OVERVIEW
+         ============================================================ -->
+    <section id="overview" class="section section--overview" aria-labelledby="overview-heading">
+      <h2 id="overview-heading">Overview</h2>
+      <!-- This is an overview section of the LMLM project. Hello, world! -->
+    </section>
+
+    <!-- ============================================================
+         3. ABOUT
+         ============================================================ -->
+    <section id="about" class="section section--about" aria-labelledby="about-heading">
+      <h2 id="about-heading">About</h2>
+
+      <!-- TODO (content step): the problem being addressed
+           (e.g. BPE tokenization vs. morpheme-level; agglutinative languages). -->
+
+      <!-- TODO (content step): research pillars / branches.
+           Each pillar will be an <article class="pillar"> with its own <h3> title
+           (h3 because it sits under this section's h2). -->
+      <div class="pillars">
+      </div>
+    </section>
+
+    <!-- ============================================================
+         4. PUBLICATIONS ARCHIVE
+         No real entries yet — do not invent papers or dates.
+         ============================================================ -->
+    <section id="publications" class="section section--publications" aria-labelledby="publications-heading">
+      <h2 id="publications-heading">Publications Archive</h2>
+
+      <!-- Each publication will be one <li> card. Template for later (copy per entry):
+        <li class="pub-card">
+          <article>
+            <h3 class="pub-card__title">[PLACEHOLDER: publication title]</h3>
+            <p class="pub-card__authors">[PLACEHOLDER: authors]</p>
+            <p class="pub-card__venue">[PLACEHOLDER: venue] · <time datetime="">[PLACEHOLDER: year]</time></p>
+            <p class="pub-card__links"><a href="">[PLACEHOLDER: PDF link]</a></p>
+          </article>
+        </li>
+      -->
+      <ul class="pub-list">
+      </ul>
+    </section>
+
+    <!-- ============================================================
+         5. PEOPLE
+         Names/roles to be provided — do not invent.
+         ============================================================ -->
+    <section id="people" class="section section--people" aria-labelledby="people-heading">
+      <h2 id="people-heading">People</h2>
+
+      <!-- Each person will be one <li> card. Template for later (copy per person):
+        <li class="person-card">
+          <img class="person-card__photo" src="assets/[PLACEHOLDER: filename]" alt="[PLACEHOLDER: name]">
+          <h3 class="person-card__name">[PLACEHOLDER: name]</h3>
+          <p class="person-card__role">[PLACEHOLDER: role]</p>
+        </li>
+      -->
+      <ul class="people-list">
+      </ul>
+    </section>
+
+    <!-- ============================================================
+         6. FUNDING, GRANTS & INSTITUTIONAL PARTNERS
+         Known: Carlsberg Foundation (funder), ITU Copenhagen (host).
+         No grant numbers or amounts unless provided.
+         ============================================================ -->
+    <section id="funding" class="section section--funding" aria-labelledby="funding-heading">
+      <h2 id="funding-heading">Funding, Grants &amp; Institutional Partners</h2>
+
+      <!-- TODO (content step): one <li class="partner"> each for Carlsberg Foundation and ITU
+           (logo in /assets with alt text, name, short role line). -->
+      <ul class="partner-list">
+      </ul>
+    </section>
+
+  </main>
+
+</body>
+</html>

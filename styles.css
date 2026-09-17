@@ -1,0 +1,77 @@
+/* ==============================================================
+   LMLM — main stylesheet
+   ALL colors live in :root below. Change a value here and it
+   updates everywhere it's used (via var(--name)).
+   Values are TEMPORARY placeholders — set properly in the styling step.
+   ============================================================== */
+
+:root {
+  /* --- Colors --- */
+  --color-bg: #000000;            /* page background (near-black) */
+  --color-surface: #000000;       /* slightly lifted background for cards */
+  --color-text: #ffffff;          /* main body text (off-white) */
+  --color-text-muted: #888888;    /* secondary text: authors, dates, captions */
+  --color-accent: #006b4d;        /* green: links, section markers — use sparingly */
+  --color-accent-hover: #006b4d;  /* accent on hover/focus */
+  --color-border: #333333;        /* dividers, card outlines */
+
+  /* --- Typography (placeholders) --- */
+  --font-heading: sans-serif;
+  --font-body: sans-serif;
+
+  /* --- Spacing & layout (placeholders) --- */
+  --space-section: 0;             /* vertical gap between sections */
+  --content-max-width: none;      /* max width of the text column */
+  --nav-height: 0;                /* used so anchor jumps don't hide headings under the sticky nav */
+}
+
+
+/* ==============================================================
+   Global / base (html, body, links, headings, skip-link)
+   — smooth scrolling for anchor links will go here
+   ============================================================== */
+
+
+/* ==============================================================
+   Navigation (sticky header)
+   ============================================================== */
+
+
+/* ==============================================================
+   Shared section styles (.section)
+   ============================================================== */
+
+
+/* ==============================================================
+   1. Hero (#hero)
+   ============================================================== */
+
+
+/* ==============================================================
+   2. Overview (#overview)
+   ============================================================== */
+
+
+/* ==============================================================
+   3. About (#about) — problem + research pillars
+   ============================================================== */
+
+
+/* ==============================================================
+   4. Publications Archive (#publications) — .pub-card
+   ============================================================== */
+
+
+/* ==============================================================
+   5. People (#people) — .person-card
+   ============================================================== */
+
+
+/* ==============================================================
+   6. Funding & Partners (#funding) — .partner
+   ============================================================== */
+
+
+/* ==============================================================
+   Responsive adjustments (small screens)
+   ============================================================== */
