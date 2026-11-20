@@ -4,11 +4,16 @@
   <meta charset="utf-8">
   <!-- Makes the page scale correctly on phones instead of showing a zoomed-out desktop view. -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LMLM — Linguistically Motivated Language Models</title>
-  <!-- TODO (content step): one-sentence description shown in search results / link previews. -->
-  <meta name="description" content="">
+  <title>LM² — Linguistically Motivated Language Models</title>
+  <!-- One-sentence summary shown in search results and link previews (aim for under ~160 characters). -->
+  <meta name="description" content="LM² is a group within NLPnorth at the IT University of Copenhagen studying how language models learn linguistic structure, and how linguistics can improve them.">
   <!-- Relative path (no leading slash) so this works both when opened locally and on GitHub Pages. -->
+  <!-- Small icon shown in the browser tab. -->
+  <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="stylesheet" href="styles.css">
+  <!-- defer: download in parallel, but run only after the HTML is fully parsed,
+       so the script can find the nav links and sections. -->
+  <script src="script.js" defer></script>
 </head>
 <body>
 
@@ -21,13 +26,15 @@
        ============================================================ -->
   <header class="site-header">
     <nav class="site-nav" aria-label="Main">
-      <a class="site-nav__brand" href="#hero">LMLM</a>
+      <a class="site-nav__brand" href="#hero">
+        <!-- The logo is the only thing in this link, so its alt text is the link's name. -->
+        <img class="site-nav__logo" src="assets/lm2-logo.png" alt="LM² home" width="1100" height="560">
+      </a>
       <ul class="site-nav__links">
-        <li><a href="#overview">Overview</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="#publications">Publications</a></li>
         <li><a href="#people">People</a></li>
         <li><a href="#funding">Funding</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
@@ -38,84 +45,116 @@
          1. HERO
          ============================================================ -->
     <section id="hero" class="hero">
-      <h1 class="hero__title">LMLM:  Linguistically Motivated Language Models</h1>
-      <!-- TODO (content step): one-line core mission statement, as a <p class="hero__tagline">. -->
+      <!-- The logo image is the visible title; its alt text gives the h1 a readable name
+           for screen readers and search engines. width/height let the browser reserve
+           space before the image loads, so the page doesn't jump. -->
+      <h1 class="hero__title">
+        <img class="hero__logo" src="assets/lm2-logo.png" alt="LM²" width="1100" height="560">
+      </h1>
+      <!-- Each initial is wrapped in a <span> so CSS can make it bold and green, spelling
+           out "LMLM" to echo the LM² logo. Screen readers still read the words normally. -->
+      <p class="hero__tagline"><span class="hero__initial">L</span>inguistically <span class="hero__initial">M</span>otivated <span class="hero__initial">L</span>anguage <span class="hero__initial">M</span>odels</p>
     </section>
 
     <!-- ============================================================
-         2. OVERVIEW
-         ============================================================ -->
-    <section id="overview" class="section section--overview" aria-labelledby="overview-heading">
-      <h2 id="overview-heading">Overview</h2>
-      <!-- This is an overview section of the LMLM project. Hello, world! -->
-    </section>
-
-    <!-- ============================================================
-         3. ABOUT
+         1. ABOUT
+         Text from text.txt.
          ============================================================ -->
     <section id="about" class="section section--about" aria-labelledby="about-heading">
       <h2 id="about-heading">About</h2>
 
-      <!-- TODO (content step): the problem being addressed
-           (e.g. BPE tokenization vs. morpheme-level; agglutinative languages). -->
+      <p>Welcome to our website! We are a group of people with an interest in the language part of NLP, and we are part of the <a href="https://nlpnorth.github.io/">NLPnorth</a> group at the IT University of Copenhagen (ITU). Among other things, our interests are in:</p>
 
-      <!-- TODO (content step): research pillars / branches.
-           Each pillar will be an <article class="pillar"> with its own <h3> title
-           (h3 because it sits under this section's h2). -->
-      <div class="pillars">
-      </div>
-    </section>
-
-    <!-- ============================================================
-         4. PUBLICATIONS ARCHIVE
-         No real entries yet — do not invent papers or dates.
-         ============================================================ -->
-    <section id="publications" class="section section--publications" aria-labelledby="publications-heading">
-      <h2 id="publications-heading">Publications Archive</h2>
-
-      <!-- Each publication will be one <li> card. Template for later (copy per entry):
-        <li class="pub-card">
-          <article>
-            <h3 class="pub-card__title">[PLACEHOLDER: publication title]</h3>
-            <p class="pub-card__authors">[PLACEHOLDER: authors]</p>
-            <p class="pub-card__venue">[PLACEHOLDER: venue] · <time datetime="">[PLACEHOLDER: year]</time></p>
-            <p class="pub-card__links"><a href="">[PLACEHOLDER: PDF link]</a></p>
-          </article>
-        </li>
-      -->
-      <ul class="pub-list">
+      <ul class="interest-list">
+        <li>Do language models learn linguistic structures? If yes: how, when, where?</li>
+        <li>Can we enhance language models in some dimensions by incorporating more linguistic signals?</li>
+        <li>How do we adapt architecture and training for languages with specific properties? What are the relevant properties for this?</li>
+        <li>How can we use language overlaps to train better multi-lingual models?</li>
+        <li>How do we best represent text as an input to a neural network model?</li>
       </ul>
+
+      <!-- "mailto:" links open the visitor's email app with the address filled in. -->
+      <p class="about-meetings">We hold online monthly meetings where we discuss topics on the linguistic aspects of NLP. If you would like to join, or just want to know more about the projects, get in touch at <a href="mailto:ropass@itu.dk">ropass@itu.dk</a>.</p>
     </section>
 
     <!-- ============================================================
-         5. PEOPLE
-         Names/roles to be provided — do not invent.
+         2. PEOPLE
+         Names and descriptions from text.txt. Empty descriptions are
+         marked as placeholders — do not invent.
          ============================================================ -->
     <section id="people" class="section section--people" aria-labelledby="people-heading">
       <h2 id="people-heading">People</h2>
 
-      <!-- Each person will be one <li> card. Template for later (copy per person):
-        <li class="person-card">
-          <img class="person-card__photo" src="assets/[PLACEHOLDER: filename]" alt="[PLACEHOLDER: name]">
-          <h3 class="person-card__name">[PLACEHOLDER: name]</h3>
-          <p class="person-card__role">[PLACEHOLDER: role]</p>
-        </li>
-      -->
       <ul class="people-list">
+        <li class="person-card">
+          <img class="person-card__photo" src="assets/people/rob.jpg" alt="Photo of Rob" loading="lazy" style="object-position: 41% 50%">
+          <h3 class="person-card__name"><a href="https://robvanderg.github.io/">Rob</a></h3>
+          <p class="person-card__role">Building more robust models in low-resource settings, and somehow still believes linguistic structure can be useful for this.</p>
+        </li>
+        <li class="person-card">
+          <img class="person-card__photo" src="assets/people/roberto.jpg" alt="Photo of Roberto" loading="lazy" style="object-position: 100% 50%">
+          <h3 class="person-card__name"><a href="https://www.linkedin.com/in/roberto-passaro-5125162a3/">Roberto</a></h3>
+          <p class="person-card__role">Exploring effects of linguistically motivated tokenization, and implications for embedding spaces.</p>
+        </li>
+        <li class="person-card">
+          <img class="person-card__photo" src="assets/people/yi.jpg" alt="Photo of Yi" loading="lazy" style="object-position: 50% 25%">
+          <h3 class="person-card__name"><a href="https://www.linkedin.com/in/yi-shi-38616a337/">Yi</a></h3>
+          <p class="person-card__role">Linguistic structure and typology in language modeling, and evaluation methods that better reflect models’ capabilities.</p>
+        </li>
+        <li class="person-card">
+          <img class="person-card__photo" src="assets/people/arzu.jpg" alt="Photo of Arzu" loading="lazy" style="object-position: 50% 50%">
+          <h3 class="person-card__name"><a href="https://www.linkedin.com/in/arzu-burcu-g%C3%BCven-4081338b/">Arzu</a></h3>
+          <p class="person-card__role">I study the linguistic skills of language models. My focus is less on benchmarking models and more on which structures models handle well, where they fail, and why, across typologically diverse languages. I’m also interested in how models generalize linguistic information when trained under controlled conditions.</p>
+        </li>
+        <li class="person-card">
+          <img class="person-card__photo" src="assets/people/anne-marie.jpg" alt="Photo of Anne-Marie" loading="lazy" style="object-position: 50% 25%">
+          <h3 class="person-card__name"><a href="https://www.uni.lu/fhse-en/people/anne-marie-lutgen/">Anne-Marie</a></h3>
+          <p class="person-card__role">Exploring how sociolinguistic insights can inform NLP research and how NLP methods can be adapted to better represent and process variation.</p>
+        </li>
+        <li class="person-card">
+          <img class="person-card__photo" src="assets/people/carmin.jpg" alt="Photo of Carmin" loading="lazy" style="object-position: 50% 50%">
+          <h3 class="person-card__name"><a href="https://www.linkedin.com/in/carmin-vide/">Carmin</a></h3>
+          <p class="person-card__role">My focus is on studying and evaluating morphologically motivated tokenization for multilingual language models.</p>
+        </li>
       </ul>
+      <!-- Photos are cropped to squares by CSS. The inline object-position says which part
+           of each photo to keep (e.g. "50% 25%" = keep the upper part, where the face is). -->
     </section>
 
+    <!-- PUBLICATIONS: section removed for now (no papers yet). To bring it back,
+         re-add a <section id="publications"> here plus a nav link; the .pub-card
+         styles are still in styles.css. -->
+
     <!-- ============================================================
-         6. FUNDING, GRANTS & INSTITUTIONAL PARTNERS
-         Known: Carlsberg Foundation (funder), ITU Copenhagen (host).
-         No grant numbers or amounts unless provided.
+         4. FUNDING, GRANTS & INSTITUTIONAL PARTNERS
+         Grant text from text.txt. ITU is the host institution (per project notes).
          ============================================================ -->
     <section id="funding" class="section section--funding" aria-labelledby="funding-heading">
       <h2 id="funding-heading">Funding, Grants &amp; Institutional Partners</h2>
 
-      <!-- TODO (content step): one <li class="partner"> each for Carlsberg Foundation and ITU
-           (logo in /assets with alt text, name, short role line). -->
       <ul class="partner-list">
+        <li class="partner">
+          <h3>3CPO</h3>
+          <p>Multilinguality in language models is often only considered in the last phase of the design and training. In contrast, we propose to consider diversity from the start; we propose a variety of sampling techniques that target language coverage, and train tokenizers on a more diverse/fair sample. We compare training on the 100 most frequent languages against all languages with data and cluster-based samples.</p>
+          <p class="partner__grant">Granted by Nvidia (200,000 USD compute credits)</p>
+        </li>
+        <li class="partner">
+          <h3>LMLM</h3>
+          <p>LMLM proposes to build Linguistically Motivated LLMs. This is done by adapting the training regime as well as the LLM architecture to incorporate different linguistic levels. This will lead to mitigation of shortcut learning and more reliable LLMs.</p>
+          <p class="partner__grant">Granted by the Carlsberg Foundation (7M DKK) · <a href="https://www.carlsbergfondet.dk/en/what-we-have-funded/cf25-1861/">Grant page</a></p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============================================================
+         5. CONTACT
+         No contact details provided yet — do not invent.
+         ============================================================ -->
+    <section id="contact" class="section section--contact" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Contact</h2>
+      <ul class="contact-list">
+        <li>Roberto · <a href="mailto:ropass@itu.dk">ropass@itu.dk</a></li>
+        <li>Rob · <a href="mailto:robv@itu.dk">robv@itu.dk</a></li>
       </ul>
     </section>
 
