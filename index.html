@@ -10,10 +10,14 @@
   <!-- Relative path (no leading slash) so this works both when opened locally and on GitHub Pages. -->
   <!-- Small icon shown in the browser tab. -->
   <link rel="icon" type="image/png" href="assets/favicon.png">
-  <link rel="stylesheet" href="styles.css">
+  <!-- "?v=..." is a version tag. Browsers keep saved copies of CSS/JS files, so
+       after an update a visitor could see new HTML with an old stylesheet. Changing
+       this tag (e.g. to today's date) whenever styles.css or script.js changes makes
+       every browser download the new file. -->
+  <link rel="stylesheet" href="styles.css?v=2026-11-24">
   <!-- defer: download in parallel, but run only after the HTML is fully parsed,
        so the script can find the nav links and sections. -->
-  <script src="script.js" defer></script>
+  <script src="script.js?v=2026-11-24" defer></script>
 </head>
 <body>
 
