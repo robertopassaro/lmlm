@@ -623,10 +623,6 @@ main {
   color: var(--color-text-muted);
 }
 
-/* Meetings note after the interest list: space above, same reading width. */
-.about-meetings {
-  margin-top: var(--space-lg);
-}
 
 /* Contact: plain list of names + email links, no bullets. */
 .contact-list {
@@ -644,4 +640,143 @@ main {
   margin-top: var(--space-md);
   font-style: normal;             /* undo the browser's default italics */
   color: var(--color-text-muted);
+}
+
+
+/* ==============================================================
+   Meetings (#meetings) — monthly schedule
+   Each meeting is a row: date on the left, speaker + topic on the
+   right. On phones the date moves above the text (see bottom).
+   ============================================================== */
+
+.meetings__group {
+  margin-top: var(--space-lg);
+}
+
+/* "Upcoming" / "Past": small mono caps label, like the section numbers. */
+.section .meetings__label {
+  margin-bottom: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.meeting-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-border);
+}
+
+/* Two-column grid: fixed-width date column, flexible text column.
+   "grid-template-areas" names the cells so each piece can be placed
+   by name — and rearranged on phones by changing just this one rule. */
+.meeting {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  grid-template-areas:
+    "date speaker"
+    "date topic";
+  column-gap: var(--space-md);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.meeting__date {
+  grid-area: date;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: var(--line-height-body);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.meeting__speaker {
+  grid-area: speaker;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Speaker names link to their People card: white like the name, green on hover. */
+.meeting__speaker a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.meeting__speaker a:hover {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
+}
+
+.meeting__topic {
+  grid-area: topic;
+  max-width: var(--content-max-width);
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+/* Not decided yet: dimmer and italic, so placeholders don't look like real content. */
+.meeting__speaker--tba,
+.meeting__topic--tba {
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
+/* The next meeting: date in the main text color, plus a small green tag.
+   The tag sits in the date column, above the date. */
+.meeting--next {
+  grid-template-areas:
+    "tag  speaker"
+    "date topic";
+}
+
+.meeting--next .meeting__date {
+  color: var(--color-text);
+}
+
+.meeting__next {
+  grid-area: tag;
+  align-self: start;
+  justify-self: start;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/* The tag and date share the left column across both rows. */
+.meeting--next .meeting__date {
+  align-self: start;
+}
+
+/* Past meetings: slightly faded, so the eye goes to what's coming. */
+#meetings-past .meeting {
+  opacity: 0.75;
+}
+
+/* Phones: one column — (tag) date, then speaker, then topic. */
+@media (max-width: 37.5em) {
+  .meeting,
+  .meeting--next {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "date"
+      "speaker"
+      "topic";
+    row-gap: 0.125rem;
+  }
+
+  .meeting--next {
+    grid-template-areas:
+      "tag"
+      "date"
+      "speaker"
+      "topic";
+  }
 }

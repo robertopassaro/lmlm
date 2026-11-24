@@ -47,3 +47,51 @@
 
   window.addEventListener('scroll', update, { passive: true });
 })();
+
+
+/* ==============================================================
+   LM² — meetings: split into Upcoming / Past, tag the next one
+   Each meeting has <time datetime="YYYY-MM-DD">. Dates in that
+   format sort alphabetically in date order, so a plain string
+   comparison with today's date is enough — no date library needed.
+   A meeting stays "upcoming" for the whole of its own day.
+   ============================================================== */
+
+(function () {
+  const upcoming = document.getElementById('meetings-upcoming');
+  const past = document.getElementById('meetings-past');
+  if (!upcoming || !past) return;
+
+  const now = new Date();
+  // Build today's date as "YYYY-MM-DD" in the visitor's local time zone.
+  const today = [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, '0'),
+    String(now.getDate()).padStart(2, '0')
+  ].join('-');
+
+  const upcomingList = upcoming.querySelector('.meeting-list');
+  const pastList = past.querySelector('.meeting-list');
+
+  upcomingList.querySelectorAll('.meeting').forEach(function (meeting) {
+    const date = meeting.querySelector('time').getAttribute('datetime');
+    if (date < today) {
+      pastList.prepend(meeting);   // prepend = most recent past meeting on top
+    }
+  });
+
+  upcoming.querySelector('.meetings__label').textContent = 'Upcoming';
+
+  const next = upcomingList.querySelector('.meeting');
+  if (next) {
+    next.classList.add('meeting--next');
+    const tag = document.createElement('span');
+    tag.className = 'meeting__next';
+    tag.textContent = 'Next';
+    next.prepend(tag);
+  } else {
+    upcoming.hidden = true;        // nothing scheduled: show only the past list
+  }
+
+  if (pastList.children.length) past.hidden = false;
+})();

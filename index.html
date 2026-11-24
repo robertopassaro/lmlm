@@ -32,6 +32,7 @@
       </a>
       <ul class="site-nav__links">
         <li><a href="#about">About</a></li>
+        <li><a href="#meetings">Meetings</a></li>
         <li><a href="#people">People</a></li>
         <li><a href="#funding">Funding</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -72,13 +73,66 @@
         <li>How can we use language overlaps to train better multi-lingual models?</li>
         <li>How do we best represent text as an input to a neural network model?</li>
       </ul>
-
-      <!-- "mailto:" links open the visitor's email app with the address filled in. -->
-      <p class="about-meetings">We hold online monthly meetings where we discuss topics on the linguistic aspects of NLP. If you would like to join, or just want to know more about the projects, get in touch at <a href="mailto:ropass@itu.dk">ropass@itu.dk</a>.</p>
     </section>
 
     <!-- ============================================================
-         2. PEOPLE
+         2. MEETINGS
+         Monthly meeting schedule. All meetings live in ONE list, oldest
+         first. script.js sorts them into "Upcoming" and "Past" by comparing
+         each date with today, and tags the next one — so nothing needs to
+         be moved by hand once a meeting has happened.
+
+         TO ADD A MEETING: copy one <li class="meeting"> block, keep the list
+         in date order, and set datetime="YYYY-MM-DD" (the script reads that;
+         the visible text is just for people). Only list meetings that have
+         a confirmed speaker.
+         ============================================================ -->
+    <section id="meetings" class="section section--meetings" aria-labelledby="meetings-heading">
+      <h2 id="meetings-heading">Meetings</h2>
+
+      <p>We hold online monthly meetings where we discuss topics on the linguistic aspects of NLP. If you would like to join, or just want to know more about the projects, get in touch at <a href="mailto:ropass@itu.dk">ropass@itu.dk</a>.</p>
+
+      <div class="meetings__group" id="meetings-upcoming">
+        <!-- Without JavaScript this heading stays "Schedule" and shows every meeting. -->
+        <h3 class="meetings__label">Schedule</h3>
+        <ol class="meeting-list">
+          <li class="meeting">
+            <time class="meeting__date" datetime="2026-09-21">21 Sep 2026</time>
+            <p class="meeting__speaker"><a href="#person-rob">Rob</a></p>
+            <p class="meeting__topic">Tokenization algorithms, design choices, Morfessor in HF?</p>
+          </li>
+          <li class="meeting">
+            <time class="meeting__date" datetime="2026-10-26">26 Oct 2026</time>
+            <p class="meeting__speaker"><a href="#person-anne-marie">Anne-Marie</a></p>
+            <p class="meeting__topic">Luxembourgish, tokenization and variation: what is the best setup?</p>
+          </li>
+          <li class="meeting">
+            <time class="meeting__date" datetime="2026-11-23">23 Nov 2026</time>
+            <p class="meeting__speaker"><a href="#person-arzu">Arzu</a></p>
+            <p class="meeting__topic">Small language model training, multilingual linguistic evaluation</p>
+          </li>
+          <li class="meeting">
+            <time class="meeting__date" datetime="2026-12-14">14 Dec 2026</time>
+            <p class="meeting__speaker"><a href="#person-yi">Yi</a></p>
+            <p class="meeting__topic">Intrinsic metrics (BPC, unigram normalized loss, etc.)</p>
+          </li>
+          <li class="meeting">
+            <time class="meeting__date" datetime="2027-01-18">18 Jan 2027</time>
+            <p class="meeting__speaker"><a href="#person-roberto">Roberto</a></p>
+            <p class="meeting__topic">Challenges with canonical morphological segmentation in Language Models</p>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Filled in by script.js with meetings whose date has passed (most recent first). -->
+      <div class="meetings__group" id="meetings-past" hidden>
+        <h3 class="meetings__label">Past</h3>
+        <ol class="meeting-list" reversed></ol>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. PEOPLE
          Names and descriptions from text.txt. Empty descriptions are
          marked as placeholders — do not invent.
          ============================================================ -->
@@ -86,32 +140,32 @@
       <h2 id="people-heading">People</h2>
 
       <ul class="people-list">
-        <li class="person-card">
+        <li class="person-card" id="person-rob">
           <img class="person-card__photo" src="assets/people/rob.jpg" alt="Photo of Rob" loading="lazy" style="object-position: 41% 50%">
           <h3 class="person-card__name"><a href="https://robvanderg.github.io/">Rob</a></h3>
           <p class="person-card__role">Building more robust models in low-resource settings, and somehow still believes linguistic structure can be useful for this.</p>
         </li>
-        <li class="person-card">
+        <li class="person-card" id="person-roberto">
           <img class="person-card__photo" src="assets/people/roberto.jpg" alt="Photo of Roberto" loading="lazy" style="object-position: 100% 50%">
           <h3 class="person-card__name"><a href="https://www.linkedin.com/in/roberto-passaro-5125162a3/">Roberto</a></h3>
           <p class="person-card__role">Exploring effects of linguistically motivated tokenization, and implications for embedding spaces.</p>
         </li>
-        <li class="person-card">
+        <li class="person-card" id="person-yi">
           <img class="person-card__photo" src="assets/people/yi.jpg" alt="Photo of Yi" loading="lazy" style="object-position: 50% 25%">
           <h3 class="person-card__name"><a href="https://www.linkedin.com/in/yi-shi-38616a337/">Yi</a></h3>
           <p class="person-card__role">Linguistic structure and typology in language modeling, and evaluation methods that better reflect models’ capabilities.</p>
         </li>
-        <li class="person-card">
+        <li class="person-card" id="person-arzu">
           <img class="person-card__photo" src="assets/people/arzu.jpg" alt="Photo of Arzu" loading="lazy" style="object-position: 50% 50%">
           <h3 class="person-card__name"><a href="https://www.linkedin.com/in/arzu-burcu-g%C3%BCven-4081338b/">Arzu</a></h3>
           <p class="person-card__role">I study the linguistic skills of language models. My focus is less on benchmarking models and more on which structures models handle well, where they fail, and why, across typologically diverse languages.</p>
         </li>
-        <li class="person-card">
+        <li class="person-card" id="person-anne-marie">
           <img class="person-card__photo" src="assets/people/anne-marie.jpg" alt="Photo of Anne-Marie" loading="lazy" style="object-position: 50% 25%">
           <h3 class="person-card__name"><a href="https://www.uni.lu/fhse-en/people/anne-marie-lutgen/">Anne-Marie</a></h3>
           <p class="person-card__role">Exploring how sociolinguistic insights can inform NLP research and how NLP methods can be adapted to better represent and process variation.</p>
         </li>
-        <li class="person-card">
+        <li class="person-card" id="person-carmin">
           <img class="person-card__photo" src="assets/people/carmin.jpg" alt="Photo of Carmin" loading="lazy" style="object-position: 50% 50%">
           <h3 class="person-card__name"><a href="https://www.linkedin.com/in/carmin-vide/">Carmin</a></h3>
           <p class="person-card__role">My focus is on studying and evaluating morphologically motivated tokenization for multilingual language models.</p>
